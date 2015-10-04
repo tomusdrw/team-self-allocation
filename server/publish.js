@@ -5,7 +5,7 @@ Meteor.publish('/Projects/get', function (projectsSet) {
 });
 
 Meteor.publish('/Allocations/get', function (projectsSet) {
-  return Allocations.find({
+  return Allocation.find({
     projectsSet: projectsSet
   });
 });
