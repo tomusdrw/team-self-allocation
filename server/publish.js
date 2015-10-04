@@ -9,3 +9,15 @@ Meteor.publish('/Allocations/get', function (projectsSet) {
     projectsSet: projectsSet
   });
 });
+
+Meteor.publish('/Users/get', function () {
+  return Meteor.users.find(
+    {},
+    {
+      fields: {
+        _id: 1,
+        username: 1
+      }
+    }
+  );
+});

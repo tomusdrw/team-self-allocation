@@ -26,3 +26,4 @@ houston:admin
 ejson
 iron:router
 check
+erasaur:meteor-lodash

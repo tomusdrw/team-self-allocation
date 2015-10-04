@@ -102,7 +102,7 @@ YourAllocations = React.createClass({
 
   render() {
     return (
-      <div className="container">
+      <div>
         <header>
           <h1>Your Allocation {this.data.currentUser.name}</h1>
         </header>
