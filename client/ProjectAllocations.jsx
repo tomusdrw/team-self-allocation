@@ -36,6 +36,9 @@ ProjectAllocations = React.createClass({
   },
 
   getUserLabel(user) {
+    if (!user) {
+      return 'Anon';
+    }
     return user.username || user.emails[0];
   },
 
