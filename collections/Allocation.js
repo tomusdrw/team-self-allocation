@@ -20,13 +20,13 @@ Allocation.attachSchema(new SimpleSchema({
 
 Meteor.methods({
   '/Allocations/change': function (projectsSet, prefs) {
-    Allocations.upsert({
+    Allocation.upsert({
       projectsSet: projectsSet,
-      userId: Meteor.userId
+      userId: Meteor.userId()
     }, {
       $set: {
         projectsSet: projectsSet,
-        userId: Meteor.userId,
+        userId: Meteor.userId(),
         projectPrefs: prefs
       }
     });
