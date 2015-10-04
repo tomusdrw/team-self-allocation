@@ -1,0 +1,18 @@
+---
+- name: 'Removing previous version'
+  file:
+    state: absent
+    path: /opt/tsa-app/
+
+- name: 'Unpacking build'
+  unarchive:
+    dest: /opt/tsa-app/
+    src: ../.build/meteor.tar.bz2
+
+- name: 'Runing NPM install'
+  npm:
+    path: /opt/tsa-app/tsa-app/programs/server
+
+- name: 'Restart service'
+  command: sudo /etc/init.d/tsa-app restart
+

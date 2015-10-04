@@ -1,0 +1,5 @@
+---
+- hosts: team-self-assignment
+  remote_user: tsa
+  tasks:
+  - include: deployment.yml
