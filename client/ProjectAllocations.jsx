@@ -20,17 +20,24 @@ ProjectAllocations = React.createClass({
 
   renderProjectUsers (project, index) {
     let projectId = project._id.toString();
-
-    return this.data.allocations.filter((allocation) => {
+    let usersInProject = this.data.allocations.filter((allocation) => {
       return allocation.projectPrefs[index] === projectId;
-    }).map((allocation) => {
+    });
+
+    if (!usersInProject.length) {
+      return (
+        <p>No one yet.</p>
+      );
+    }
+
+    return usersInProject.map((allocation) => {
       // change to user
       return this.findUser(allocation.userId);
     }).map((user) => {
       return (
-        <div className="list-group-item">
+        <li>
           {this.getUserLabel(user)}
-        </div>
+        </li>
       );
     });
   },
@@ -43,13 +50,14 @@ ProjectAllocations = React.createClass({
   },
 
   renderProjectPreferences (project) {
+    var names = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
     return _.range(noOfPrefs).map((index) => {
       return (
         <div className="col-sm-4">
-          <h5>{index+1}. Preference</h5>
-          <div className="list-group">
+          <h5>{names[index]} Preference</h5>
+          <ol>
             { this.renderProjectUsers(project, index) }
-          </div>
+          </ol>
         </div>
       );
     });
@@ -59,11 +67,14 @@ ProjectAllocations = React.createClass({
     return this.data.projects.map((project) => {
       return (
         <div>
-          <hr />
-          <h3>{project.projectName}</h3>
-          <p>{project.projectDescription}</p>
-          <div className="row">
-            { this.renderProjectPreferences(project) }
+          <div className="panel panel-primary">
+            <div className="panel-heading"><h3 className="panel-title">{project.projectName}</h3></div>
+            <div className="panel-body">
+              <p>{project.projectDescription}</p>
+              <div className="row">
+                { this.renderProjectPreferences(project) }
+              </div>
+            </div>
           </div>
         </div>
       );

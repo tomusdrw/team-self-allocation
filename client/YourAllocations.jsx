@@ -117,7 +117,7 @@ YourAllocations = React.createClass({
     return (
       <div>
         <header>
-          <h1>Your Allocation {this.data.currentUser.name}</h1>
+          <h1>Your Allocation: {this.data.currentUser.username}</h1>
         </header>
 
         <div className="col-md-5 col-sm-7">
@@ -131,8 +131,7 @@ YourAllocations = React.createClass({
               className="btn btn-success" 
               disabled={!this.state.dirty || !this.state.isOk}
               >
-              <span className="glyphicon glyphicon-floppy-disk" />
-              Update changes
+              Update
             </button>
           </form>
         </div>

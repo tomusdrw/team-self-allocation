@@ -11,8 +11,12 @@ App = React.createClass({
   renderData () {
     if (!this.data.currentUser) {
       return (
-        <div className="alert alert-warning">
-          Please login or create account first.
+        <div>
+          <ProjectAllocations />
+          <hr />
+          <div className="alert alert-warning">
+            Please login or create your account to change your allocations.
+          </div>
         </div>
       );
     }
@@ -28,11 +32,19 @@ App = React.createClass({
 
   render() {
     return (
-      <div className="container">
+      <div>
         <header>
-          <h1>Self Allocation</h1>
+          <h1 className="text-center">Self Allocation</h1>
+          <p>
+            You can read about process in the article <a
+              href="http://blogs.msdn.com/b/bharry/archive/2015/07/24/self-forming-teams-at-scale.aspx"
+              >
+              Self forming teams at scale
+            </a> 
+            .
+          </p>
         </header>
-        
+        <hr />
         {this.renderData()}
       </div>
     );
