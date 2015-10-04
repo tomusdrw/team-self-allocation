@@ -29,13 +29,17 @@ YourAllocations = React.createClass({
     });
   },
 
-  getPreferedProject (index) {
+  getPreferedProject (index, newState) {
+    newState = newState || {};
+    let key = 'allocations_' + index;
+    if (this.state[key] || newState[key]) {
+      return newState[key] || this.state[key];
+    }
+
     if (!this.data.myAllocations) {
       return;
     }
-    if (this.state['allocations_' + index]) {
-      return this.state['allocations_' + index];
-    }
+
     return this.data.myAllocations.projectPrefs[index];
   },
 
@@ -51,6 +55,7 @@ YourAllocations = React.createClass({
           className="form-control" 
           value={this.getPreferedProject(property)}
           >
+          <option disabled>-- select project--</option>
           {this.renderProjectsAsOptions()}
         </select>
       </div>
@@ -64,23 +69,31 @@ YourAllocations = React.createClass({
     };
     newState[alloc] = React.findDOMNode(this.refs['prefs' + index]).value.trim();
 
-    // Validate if state is currect
-    newState.isOk = this.validateCurrentState();
     this.setState(newState);
+
+    // Validate if state is currect
+    newState.isOk = this.isCurrentStateValid(newState);
+
   },
 
-  validateCurrentState() {
-    let prefs = this.getCurrentPrefs();
+  isCurrentStateValid(newState) {
+    let prefs = this.getCurrentPrefs(newState);
+
     // search for duplicates
-    return prefs.reduce((hasDuplicates, elem, index) => {
-      return hasDuplicates || prefs.indexOf(elem) !== index;
+    var hasDuplicates = prefs.reduce((hasDuplicates, elem, index) => {
+      var isDuplicate = prefs.indexOf(elem) !== index;
+      return hasDuplicates || isDuplicate;
     }, false);
+
+    var hasUndefined = prefs.filter((x) => x === undefined).length > 0;
+
+    return !hasDuplicates && !hasUndefined;
   },
 
-  getCurrentPrefs () {
+  getCurrentPrefs (newState) {
     let arr = Array(noOfPrefs).join(',').split(',');
     let prefs = arr.map((v, index) => {
-      return this.getPreferedProject(index);
+      return this.getPreferedProject(index, newState);
     });
 
     return prefs;
