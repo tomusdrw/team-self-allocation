@@ -9,10 +9,16 @@
     dest: /opt/tsa-app/
     src: ../.build/meteor.tar.bz2
 
-- name: 'Runing NPM install'
+- name: 'Running NPM install'
   npm:
     path: /opt/tsa-app/tsa-app/programs/server
 
-- name: 'Restart service'
-  command: sudo /etc/init.d/tsa-app restart
+- name: 'Removing previous service'
+  command: 'pm2 delete tsa-app'
+
+- name: 'Runing service'
+  command: 'pm2 start --name tsa-app app.js'
+  args:
+    chdir: /opt/tsa-app/tsa-app/
+
 
