@@ -2,7 +2,7 @@
 - name: 'Removing previous version'
   file:
     state: absent
-    path: /opt/tsa-app/
+    path: /opt/tsa-app/tsa-app
 
 - name: 'Unpacking build'
   unarchive:
