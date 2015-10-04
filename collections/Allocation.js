@@ -17,3 +17,18 @@ this.Allocation.attachSchema(new SimpleSchema({
   },
    
 }));
+
+Meteor.methods({
+  '/Allocations/change': function (projectsSet, prefs) {
+    Allocations.upsert({
+      projectsSet: projectsSet,
+      userId: Meteor.userId
+    }, {
+      $set: {
+        projectsSet: projectsSet,
+        userId: Meteor.userId,
+        projectPrefs: prefs
+      }
+    });
+  }
+});

@@ -8,6 +8,9 @@ App = React.createClass({
   },
  
   renderTasks() {
+    if (!Meteor.userId) {
+      return;
+    }
     return this.getTasks().map((task) => {
       return <div key={task._id}>{task}</div>;
     });
@@ -20,7 +23,7 @@ App = React.createClass({
           <h1>Self Allocation</h1>
           <login-buttons />
         </header>
- 
+        
         <ul>
           {this.renderTasks()}
         </ul>
