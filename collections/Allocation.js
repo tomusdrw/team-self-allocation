@@ -20,6 +20,15 @@ Allocation.attachSchema(new SimpleSchema({
 
 Meteor.methods({
   '/Allocations/change': function (projectsSet, prefs) {
+    var hasDuplicates = prefs.reduce(function (hasDuplicates, v, index) {
+      return hasDuplicates || prefs.indexOf(v) !== index;
+    }, false);
+  
+    if (hasDuplicates) {
+      console.warn('Duplicates found!', prefs);
+      return;
+    }
+
     Allocation.upsert({
       projectsSet: projectsSet,
       userId: Meteor.userId()
