@@ -7,7 +7,7 @@
 - name: 'Unpacking build'
   unarchive:
     dest: /opt/tsa-app/
-    src: ../.build/meteor.tar.bz2
+    src: ./.build/meteor.tar.bz2
 
 - name: 'Running NPM install'
   npm:
