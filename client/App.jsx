@@ -36,7 +36,7 @@ App = React.createClass({
         <header>
           <h1 className="text-center">Self Allocation</h1>
           <p>
-            You can read about process in the article <a
+            You can read more about the process in <a
               href="http://blogs.msdn.com/b/bharry/archive/2015/07/24/self-forming-teams-at-scale.aspx"
               >
               Self forming teams at scale
