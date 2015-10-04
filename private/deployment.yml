@@ -17,7 +17,7 @@
   command: 'pm2 delete tsa-app'
 
 - name: 'Runing service'
-  command: 'pm2 start --name tsa-app app.js'
+  command: 'pm2 start --name tsa-app main.js'
   args:
     chdir: /opt/tsa-app/tsa-app/
 
