@@ -1,5 +1,5 @@
-this.Projects = new Mongo.Collection('projects');
-this.Projects.attachSchema(new SimpleSchema({
+Projects = new Mongo.Collection('projects');
+Projects.attachSchema(new SimpleSchema({
 
   projectsSet: {
     type: String,
@@ -16,3 +16,7 @@ this.Projects.attachSchema(new SimpleSchema({
   }
 
 }));
+
+if (Meteor.isServer) {
+  Houston.add_collection(Projects);
+}

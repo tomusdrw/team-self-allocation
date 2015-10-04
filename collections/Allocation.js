@@ -1,5 +1,5 @@
-this.Allocation = new Mongo.Collection('allocation');
-this.Allocation.attachSchema(new SimpleSchema({
+Allocation = new Mongo.Collection('allocation');
+Allocation.attachSchema(new SimpleSchema({
 
   projectsSet: {
     type: String,
@@ -32,3 +32,7 @@ Meteor.methods({
     });
   }
 });
+
+if (Meteor.isServer) {
+  Houston.add_collection(Allocation);
+}
